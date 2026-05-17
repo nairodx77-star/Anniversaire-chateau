@@ -348,13 +348,14 @@ export default function App() {
   </p>
 
   <a
-    className="domain-pdf-link"
-    href="https://domainedelahauteporte.com/pages-plaquettes/Plaquette%20locaton%20saisonni%C3%A8re%20HP..pdf"
-    target="_blank"
-    rel="noreferrer"
-  >
-    Découvrir la plaquette du Domaine de la Haute-Porte
-  </a>
+  className="domain-pdf-button"
+  href="https://domainedelahauteporte.com/pages-plaquettes/Plaquette%20locaton%20saisonni%C3%A8re%20HP..pdf"
+  target="_blank"
+  rel="noreferrer"
+>
+  <span>Découvrir le château</span>
+  <small>Voir la plaquette officielle du Domaine</small>
+</a>
 </div>
           </div>
         </section>
