@@ -770,9 +770,15 @@ function Hero({ onReserveClick }) {
 
       <div className="hero-overlay" />
 
-      <div className="hero-portrait hero-portrait-left">
-        <img src="/images/dorian.jpg" alt="Dorian" />
-      </div>
+<div className="hero-left-stack">
+  <div className="hero-left-card hero-left-card-top">
+    <img src="/images/dorian2.jpg" alt="Dorian et Erwan" />
+  </div>
+
+  <div className="hero-left-card hero-left-card-bottom">
+    <img src="/images/dorian.jpg" alt="Dorian et Erwan" />
+  </div>
+</div>
 
       <div className="hero-gallery hero-gallery-right">
         <div className="hero-gallery-card hero-gallery-card-main">
