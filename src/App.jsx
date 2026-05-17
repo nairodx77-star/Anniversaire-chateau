@@ -321,24 +321,26 @@ export default function App() {
               <h2>Une belle demeure pour un week-end qui sort de l’ordinaire.</h2>
             </div>
 
-            <div className="text-block">
-              <p>
-                Pour nos 40 ans, on voulait éviter la salle impersonnelle, les
-                néons et les conversations debout entre deux petits fours. On
-                vous invite donc dans une grande demeure de caractère, au calme,
-                entourée de verdure, avec des chambres, une piscine, des espaces
-                pour se retrouver et assez de charme pour rendre le week-end
-                mémorable.
-              </p>
+           <div className="text-block">
+  <p>
+    Pour nos 40 ans, on avait deux options : accepter dignement le temps
+    qui passe… ou privatiser un château du XIXe siècle pour faire comme
+    si tout allait très bien. On a choisi la deuxième option.
+  </p>
 
-              <p>
-                Le Domaine de la Haute-Porte est présenté comme une propriété
-                familiale ancienne, nichée entre Sarthe, Mayenne et Anjou. Son
-                château du XIXe siècle, son parc, ses arbres rares et son
-                atmosphère de maison habitée donnent au lieu ce mélange rare :
-                élégant, vivant, jamais figé.
-              </p>
-            </div>
+  <p>
+    On vous invite donc à passer un week-end en dehors du temps, au cœur
+    de la nature, dans une grande demeure pleine de charme, avec des
+    chambres pour dormir — un peu —, des espaces pour se retrouver, des
+    activités pour se divertir, et surtout une belle piscine qui devrait
+    devenir le théâtre officiel des meilleurs rosés du week-end.
+  </p>
+
+  <p>
+    Évidemment, le champagne sera de la partie. Parce qu’à 40 ans, on ne
+    vieillit pas : on millésime.
+  </p>
+</div>
           </div>
         </section>
 
