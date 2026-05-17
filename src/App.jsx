@@ -12,7 +12,6 @@ import {
   House,
   MapPin,
   Palmtree,
-  PartyPopper,
   ShieldCheck,
   Sparkles,
   Trash2,
@@ -21,21 +20,9 @@ import {
   Waves,
 } from "lucide-react";
 import { getAllSleepSlots, getRoomCapacity, rooms } from "./data/rooms";
+import { isSupabaseConfigured, supabase } from "./supabaseClient";
 
-const STORAGE_KEY = "dorian-erwan-40-reservations-v1";
 const ADMIN_CODE = "1977";
-
-function loadReservations() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-  } catch {
-    return {};
-  }
-}
-
-function saveReservations(reservations) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(reservations));
-}
 
 function csvEscape(value) {
   return `"${String(value ?? "").replaceAll('"', '""')}"`;
@@ -53,6 +40,28 @@ function formatReservationDate(value) {
   }
 }
 
+function normalizeReservations(rows) {
+  const result = {};
+
+  rows.forEach((row) => {
+    result[row.slot_id] = {
+      id: row.id,
+      firstName: row.first_name,
+      lastName: row.last_name,
+      phone: row.phone || "",
+      slotId: row.slot_id,
+      roomId: row.room_id,
+      roomName: row.room_name,
+      building: row.building,
+      bedLabel: row.bed_label,
+      sleepNumber: row.sleep_number,
+      createdAt: row.created_at,
+    };
+  });
+
+  return result;
+}
+
 export default function App() {
   const [reservations, setReservations] = useState({});
   const [activeRoomId, setActiveRoomId] = useState(rooms[0].id);
@@ -63,14 +72,8 @@ export default function App() {
   const [selectedSlotId, setSelectedSlotId] = useState("");
   const [adminCode, setAdminCode] = useState("");
   const [adminUnlocked, setAdminUnlocked] = useState(false);
-
-  useEffect(() => {
-    setReservations(loadReservations());
-  }, []);
-
-  useEffect(() => {
-    saveReservations(reservations);
-  }, [reservations]);
+  const [loading, setLoading] = useState(true);
+  const [systemMessage, setSystemMessage] = useState("");
 
   const allSlots = useMemo(() => getAllSleepSlots(), []);
 
@@ -92,6 +95,7 @@ export default function App() {
   const stats = useMemo(() => {
     const totalSlots = allSlots.length;
     const bookedSlots = Object.keys(reservations).length;
+
     return {
       totalSlots,
       bookedSlots,
@@ -104,7 +108,56 @@ export default function App() {
     };
   }, [allSlots, reservations]);
 
-  function handleReserve(event) {
+  async function fetchReservations() {
+    if (!isSupabaseConfigured) {
+      setSystemMessage("Supabase n’est pas encore configuré.");
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+
+    const { data, error } = await supabase
+      .from("reservations")
+      .select("*")
+      .order("created_at", { ascending: true });
+
+    if (error) {
+      setSystemMessage("Impossible de charger les réservations.");
+      setLoading(false);
+      return;
+    }
+
+    setReservations(normalizeReservations(data || []));
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    fetchReservations();
+
+    if (!isSupabaseConfigured) return;
+
+    const channel = supabase
+      .channel("reservations-realtime")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "reservations",
+        },
+        () => {
+          fetchReservations();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  async function handleReserve(event) {
     event.preventDefault();
 
     const firstName = guestFirstName.trim();
@@ -116,34 +169,51 @@ export default function App() {
     const slot = allSlots.find((item) => item.id === selectedSlotId);
     if (!slot) return;
 
-    setReservations((current) => ({
-      ...current,
-      [selectedSlotId]: {
-        firstName,
-        lastName,
-        phone: guestPhone.trim(),
-        slotId: selectedSlotId,
-        roomId: slot.roomId,
-        roomName: slot.roomName,
-        building: slot.building,
-        bedLabel: slot.bedLabel,
-        sleepNumber: slot.sleepNumber,
-        createdAt: new Date().toISOString(),
-      },
-    }));
+    const payload = {
+      slot_id: selectedSlotId,
+      room_id: slot.roomId,
+      room_name: slot.roomName,
+      building: slot.building,
+      bed_label: slot.bedLabel,
+      sleep_number: slot.sleepNumber,
+      first_name: firstName,
+      last_name: lastName,
+      phone: guestPhone.trim() || null,
+    };
+
+    const { error } = await supabase.from("reservations").insert(payload);
+
+    if (error) {
+      setSystemMessage(
+        "Ce couchage vient peut-être d’être réservé par quelqu’un d’autre. Recharge la page ou choisis un autre couchage."
+      );
+      await fetchReservations();
+      return;
+    }
 
     setGuestFirstName("");
     setGuestLastName("");
     setGuestPhone("");
     setSelectedSlotId("");
+    setSystemMessage("Réservation enregistrée.");
+    await fetchReservations();
   }
 
-  function removeReservation(slotId) {
-    setReservations((current) => {
-      const next = { ...current };
-      delete next[slotId];
-      return next;
-    });
+  async function removeReservation(slotId) {
+    const reservation = reservations[slotId];
+    if (!reservation?.id) return;
+
+    const { error } = await supabase
+      .from("reservations")
+      .delete()
+      .eq("id", reservation.id);
+
+    if (error) {
+      setSystemMessage("Suppression impossible.");
+      return;
+    }
+
+    await fetchReservations();
   }
 
   function exportCsv() {
@@ -239,7 +309,7 @@ export default function App() {
             <div className="story-card large">
               <img src="/images/domaine.jpg" alt="Domaine de la Haute-Porte" />
               <div>
-                <span>300 hectares de nature</span>
+                <span>Nature & élégance</span>
                 <strong>Parc, bois, rivière et grands espaces</strong>
               </div>
             </div>
@@ -270,7 +340,7 @@ export default function App() {
               <Activity icon={<TreePine />} title="Balades" text="Parc, chemins, nature et coins tranquilles pour respirer." />
               <Activity icon={<Fish />} title="Pêche" text="Une activité calme pour ceux qui aiment disparaître deux heures." />
               <Activity icon={<Dumbbell />} title="Jeux & extérieur" text="Volley, croquet, trampoline, grands espaces et esprit maison de vacances." />
-              <Activity icon={<GlassWater />} title="Apéro" text="Moment central du programme. La rigueur scientifique impose de le mentionner." />
+              <Activity icon={<GlassWater />} title="Apéro" text="Moment central du programme. La rigueur impose de le mentionner." />
               <Activity icon={<Bath />} title="Détente" text="Un lieu fait pour ralentir, discuter, rire et dormir un peu." />
             </div>
           </div>
@@ -287,6 +357,8 @@ export default function App() {
               </p>
             </div>
 
+            {systemMessage && <div className="system-message">{systemMessage}</div>}
+
             <div className="stats-grid">
               <Stat icon={<BedDouble />} label="Couchages réservés" value={`${stats.bookedSlots}/${stats.totalSlots}`} />
               <Stat icon={<Users />} label="Couchages restants" value={stats.remainingSlots} />
@@ -298,24 +370,9 @@ export default function App() {
                 <div className="room-list-top">
                   <h3>Chambres</h3>
                   <div className="filters">
-                    <button
-                      className={buildingFilter === "Tous" ? "active" : ""}
-                      onClick={() => setBuildingFilter("Tous")}
-                    >
-                      Tous
-                    </button>
-                    <button
-                      className={buildingFilter === "Château" ? "active" : ""}
-                      onClick={() => setBuildingFilter("Château")}
-                    >
-                      Château
-                    </button>
-                    <button
-                      className={buildingFilter === "La Ferme" ? "active" : ""}
-                      onClick={() => setBuildingFilter("La Ferme")}
-                    >
-                      Ferme
-                    </button>
+                    <button className={buildingFilter === "Tous" ? "active" : ""} onClick={() => setBuildingFilter("Tous")}>Tous</button>
+                    <button className={buildingFilter === "Château" ? "active" : ""} onClick={() => setBuildingFilter("Château")}>Château</button>
+                    <button className={buildingFilter === "La Ferme" ? "active" : ""} onClick={() => setBuildingFilter("La Ferme")}>Ferme</button>
                   </div>
                 </div>
 
@@ -364,34 +421,38 @@ export default function App() {
 
                   <p className="room-description">{activeRoom.description}</p>
 
-                  <div className="sleep-list">
-                    {activeRoomSlots.map((slot) => {
-                      const reservation = reservations[slot.id];
-                      const isSelected = selectedSlotId === slot.id;
+                  {loading ? (
+                    <p className="form-help">Chargement des réservations…</p>
+                  ) : (
+                    <div className="sleep-list">
+                      {activeRoomSlots.map((slot) => {
+                        const reservation = reservations[slot.id];
+                        const isSelected = selectedSlotId === slot.id;
 
-                      return (
-                        <button
-                          key={slot.id}
-                          disabled={Boolean(reservation)}
-                          className={`sleep-slot ${reservation ? "booked" : ""} ${isSelected ? "selected" : ""}`}
-                          onClick={() => setSelectedSlotId(slot.id)}
-                        >
-                          <div>
-                            <strong>{slot.bedLabel}</strong>
-                            <span>Couchage {slot.sleepNumber}</span>
-                          </div>
+                        return (
+                          <button
+                            key={slot.id}
+                            disabled={Boolean(reservation)}
+                            className={`sleep-slot ${reservation ? "booked" : ""} ${isSelected ? "selected" : ""}`}
+                            onClick={() => setSelectedSlotId(slot.id)}
+                          >
+                            <div>
+                              <strong>{slot.bedLabel}</strong>
+                              <span>Couchage {slot.sleepNumber}</span>
+                            </div>
 
-                          {reservation ? (
-                            <em>
-                              Réservé par {reservation.firstName} {reservation.lastName}
-                            </em>
-                          ) : (
-                            <em>Libre</em>
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
+                            {reservation ? (
+                              <em>
+                                Réservé par {reservation.firstName} {reservation.lastName}
+                              </em>
+                            ) : (
+                              <em>Libre</em>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
 
                   <form className="reservation-form" onSubmit={handleReserve}>
                     <h4>Réserver le couchage sélectionné</h4>
@@ -425,7 +486,7 @@ export default function App() {
                       />
                     </label>
 
-                    <button className="primary-button" disabled={!selectedSlotId}>
+                    <button className="primary-button" disabled={!selectedSlotId || loading}>
                       Réserver ce couchage
                       <ChevronRight size={18} />
                     </button>
