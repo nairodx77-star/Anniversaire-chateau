@@ -39,7 +39,13 @@ function formatReservationDate(value) {
     return value;
   }
 }
+function getInitials(firstName, lastName) {
+  const firstInitial = firstName?.trim()?.charAt(0)?.toUpperCase() || "";
+  const lastInitial = lastName?.trim()?.charAt(0)?.toUpperCase() || "";
 
+  if (!firstInitial && !lastInitial) return "";
+  return `${firstInitial}.${lastInitial}.`;
+}
 function normalizeReservations(rows) {
   const result = {};
 
@@ -549,14 +555,13 @@ export default function App() {
                               <span>Couchage {slot.sleepNumber}</span>
                             </div>
 
-                            {reservation ? (
-                              <em>
-                                Réservé par {reservation.firstName}{" "}
-                                {reservation.lastName}
-                              </em>
-                            ) : (
-                              <em>Libre</em>
-                            )}
+{reservation ? (
+  <em>
+    Réservé par {getInitials(reservation.firstName, reservation.lastName)}
+  </em>
+) : (
+  <em>Libre</em>
+)}
                           </button>
                         );
                       })}
