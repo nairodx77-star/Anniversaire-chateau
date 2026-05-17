@@ -648,13 +648,13 @@ export default function App() {
               <InfoCard
                 icon={<CalendarDays />}
                 title="Arrivée"
-                text="Arrivée prévue à partir de 16h. L’horaire exact sera confirmé avant le week-end."
+                text="Arrivée prévue à partir de 16h. L’horaire exact sera confirmé avant le week-end. Le départ se fera en début d'après-midi"
               />
               <InfoCard
-                icon={<ShieldCheck />}
-                title="Départ"
-                text="Départ à organiser tranquillement le dimanche, selon les conditions de location."
-              />
+  icon={<GlassWater />}
+  title="Frais"
+  text="Pour le logement, une participation aux frais de 165 € par personne sera demandée. Pour le champagne, le rosé, les bières et les repas, on s’en occupe. Pour les autres alcools, il est fortement apprécié de ramener de quoi s’amuser :)"
+/>
               <InfoCard
                 icon={<Castle />}
                 title="Esprit du week-end"
