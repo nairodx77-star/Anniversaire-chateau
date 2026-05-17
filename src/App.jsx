@@ -109,8 +109,10 @@ export default function App() {
   }, [allSlots, reservations]);
 
   async function fetchReservations() {
-    if (!isSupabaseConfigured) {
-      setSystemMessage("Supabase n’est pas encore configuré.");
+    if (!isSupabaseConfigured || !supabase) {
+      setSystemMessage(
+        "Supabase n’est pas encore configuré. Vérifie VITE_SUPABASE_URL et VITE_SUPABASE_ANON_KEY dans Vercel."
+      );
       setLoading(false);
       return;
     }
@@ -123,7 +125,10 @@ export default function App() {
       .order("created_at", { ascending: true });
 
     if (error) {
-      setSystemMessage("Impossible de charger les réservations.");
+      console.error("Erreur chargement Supabase:", error);
+      setSystemMessage(
+        `Impossible de charger les réservations : ${error.message}`
+      );
       setLoading(false);
       return;
     }
@@ -135,7 +140,7 @@ export default function App() {
   useEffect(() => {
     fetchReservations();
 
-    if (!isSupabaseConfigured) return;
+    if (!isSupabaseConfigured || !supabase) return;
 
     const channel = supabase
       .channel("reservations-realtime")
@@ -160,14 +165,32 @@ export default function App() {
   async function handleReserve(event) {
     event.preventDefault();
 
+    setSystemMessage("");
+
     const firstName = guestFirstName.trim();
     const lastName = guestLastName.trim();
 
-    if (!selectedSlotId || !firstName || !lastName) return;
-    if (reservations[selectedSlotId]) return;
+    if (!selectedSlotId || !firstName || !lastName) {
+      setSystemMessage("Sélectionne un couchage et renseigne le prénom et le nom.");
+      return;
+    }
+
+    if (!isSupabaseConfigured || !supabase) {
+      setSystemMessage("Supabase n’est pas configuré : réservation impossible.");
+      return;
+    }
+
+    if (reservations[selectedSlotId]) {
+      setSystemMessage("Ce couchage est déjà réservé.");
+      return;
+    }
 
     const slot = allSlots.find((item) => item.id === selectedSlotId);
-    if (!slot) return;
+
+    if (!slot) {
+      setSystemMessage("Couchage introuvable.");
+      return;
+    }
 
     const payload = {
       slot_id: selectedSlotId,
@@ -184,8 +207,9 @@ export default function App() {
     const { error } = await supabase.from("reservations").insert(payload);
 
     if (error) {
+      console.error("Erreur insertion Supabase:", error);
       setSystemMessage(
-        "Ce couchage vient peut-être d’être réservé par quelqu’un d’autre. Recharge la page ou choisis un autre couchage."
+        `Réservation impossible : ${error.message}`
       );
       await fetchReservations();
       return;
@@ -201,7 +225,13 @@ export default function App() {
 
   async function removeReservation(slotId) {
     const reservation = reservations[slotId];
+
     if (!reservation?.id) return;
+
+    if (!isSupabaseConfigured || !supabase) {
+      setSystemMessage("Supabase n’est pas configuré : suppression impossible.");
+      return;
+    }
 
     const { error } = await supabase
       .from("reservations")
@@ -209,10 +239,12 @@ export default function App() {
       .eq("id", reservation.id);
 
     if (error) {
-      setSystemMessage("Suppression impossible.");
+      console.error("Erreur suppression Supabase:", error);
+      setSystemMessage(`Suppression impossible : ${error.message}`);
       return;
     }
 
+    setSystemMessage("Réservation supprimée.");
     await fetchReservations();
   }
 
@@ -259,7 +291,13 @@ export default function App() {
 
   function unlockAdmin(event) {
     event.preventDefault();
-    setAdminUnlocked(adminCode.trim() === ADMIN_CODE);
+
+    if (adminCode.trim() === ADMIN_CODE) {
+      setAdminUnlocked(true);
+      setSystemMessage("");
+    } else {
+      setSystemMessage("Code organisateur incorrect.");
+    }
   }
 
   function scrollToReservation() {
@@ -336,12 +374,36 @@ export default function App() {
             </div>
 
             <div className="activity-grid">
-              <Activity icon={<Waves />} title="Piscine" text="Pour profiter du domaine entre deux verres et trois discussions." />
-              <Activity icon={<TreePine />} title="Balades" text="Parc, chemins, nature et coins tranquilles pour respirer." />
-              <Activity icon={<Fish />} title="Pêche" text="Une activité calme pour ceux qui aiment disparaître deux heures." />
-              <Activity icon={<Dumbbell />} title="Jeux & extérieur" text="Volley, croquet, trampoline, grands espaces et esprit maison de vacances." />
-              <Activity icon={<GlassWater />} title="Apéro" text="Moment central du programme. La rigueur impose de le mentionner." />
-              <Activity icon={<Bath />} title="Détente" text="Un lieu fait pour ralentir, discuter, rire et dormir un peu." />
+              <Activity
+                icon={<Waves />}
+                title="Piscine"
+                text="Pour profiter du domaine entre deux verres et trois discussions."
+              />
+              <Activity
+                icon={<TreePine />}
+                title="Balades"
+                text="Parc, chemins, nature et coins tranquilles pour respirer."
+              />
+              <Activity
+                icon={<Fish />}
+                title="Pêche"
+                text="Une activité calme pour ceux qui aiment disparaître deux heures."
+              />
+              <Activity
+                icon={<Dumbbell />}
+                title="Jeux & extérieur"
+                text="Volley, croquet, trampoline, grands espaces et esprit maison de vacances."
+              />
+              <Activity
+                icon={<GlassWater />}
+                title="Apéro"
+                text="Moment central du programme. La rigueur impose de le mentionner."
+              />
+              <Activity
+                icon={<Bath />}
+                title="Détente"
+                text="Un lieu fait pour ralentir, discuter, rire et dormir un peu."
+              />
             </div>
           </div>
         </section>
@@ -357,35 +419,71 @@ export default function App() {
               </p>
             </div>
 
-            {systemMessage && <div className="system-message">{systemMessage}</div>}
+            {systemMessage && (
+              <div className="system-message">{systemMessage}</div>
+            )}
 
             <div className="stats-grid">
-              <Stat icon={<BedDouble />} label="Couchages réservés" value={`${stats.bookedSlots}/${stats.totalSlots}`} />
-              <Stat icon={<Users />} label="Couchages restants" value={stats.remainingSlots} />
-              <Stat icon={<House />} label="Chambres utilisées" value={`${stats.bookedRooms}/${rooms.length}`} />
+              <Stat
+                icon={<BedDouble />}
+                label="Couchages réservés"
+                value={`${stats.bookedSlots}/${stats.totalSlots}`}
+              />
+              <Stat
+                icon={<Users />}
+                label="Couchages restants"
+                value={stats.remainingSlots}
+              />
+              <Stat
+                icon={<House />}
+                label="Chambres utilisées"
+                value={`${stats.bookedRooms}/${rooms.length}`}
+              />
             </div>
 
             <div className="booking-layout">
               <aside className="room-list">
                 <div className="room-list-top">
                   <h3>Chambres</h3>
+
                   <div className="filters">
-                    <button className={buildingFilter === "Tous" ? "active" : ""} onClick={() => setBuildingFilter("Tous")}>Tous</button>
-                    <button className={buildingFilter === "Château" ? "active" : ""} onClick={() => setBuildingFilter("Château")}>Château</button>
-                    <button className={buildingFilter === "La Ferme" ? "active" : ""} onClick={() => setBuildingFilter("La Ferme")}>Ferme</button>
+                    <button
+                      className={buildingFilter === "Tous" ? "active" : ""}
+                      onClick={() => setBuildingFilter("Tous")}
+                    >
+                      Tous
+                    </button>
+                    <button
+                      className={buildingFilter === "Château" ? "active" : ""}
+                      onClick={() => setBuildingFilter("Château")}
+                    >
+                      Château
+                    </button>
+                    <button
+                      className={buildingFilter === "La Ferme" ? "active" : ""}
+                      onClick={() => setBuildingFilter("La Ferme")}
+                    >
+                      Ferme
+                    </button>
                   </div>
                 </div>
 
                 <div className="room-buttons">
                   {filteredRooms.map((room) => {
                     const capacity = getRoomCapacity(room);
-                    const roomSlots = allSlots.filter((slot) => slot.roomId === room.id);
-                    const booked = roomSlots.filter((slot) => reservations[slot.id]).length;
+                    const roomSlots = allSlots.filter(
+                      (slot) => slot.roomId === room.id
+                    );
+                    const booked = roomSlots.filter(
+                      (slot) => reservations[slot.id]
+                    ).length;
 
                     return (
                       <button
                         key={room.id}
-                        className={`room-button ${activeRoom.id === room.id ? "selected" : ""}`}
+                        className={`room-button ${
+                          activeRoom.id === room.id ? "selected" : ""
+                        }`}
                         onClick={() => {
                           setActiveRoomId(room.id);
                           setSelectedSlotId("");
@@ -393,9 +491,13 @@ export default function App() {
                       >
                         <span>
                           <strong>{room.name}</strong>
-                          <small>{room.building} · {room.atmosphere}</small>
+                          <small>
+                            {room.building} · {room.atmosphere}
+                          </small>
                         </span>
-                        <em>{booked}/{capacity}</em>
+                        <em>
+                          {booked}/{capacity}
+                        </em>
                       </button>
                     );
                   })}
@@ -414,6 +516,7 @@ export default function App() {
                       <p className="eyebrow small">{activeRoom.atmosphere}</p>
                       <h3>{activeRoom.name}</h3>
                     </div>
+
                     <div className="capacity-pill">
                       {getRoomCapacity(activeRoom)} couchages
                     </div>
@@ -432,8 +535,11 @@ export default function App() {
                         return (
                           <button
                             key={slot.id}
+                            type="button"
                             disabled={Boolean(reservation)}
-                            className={`sleep-slot ${reservation ? "booked" : ""} ${isSelected ? "selected" : ""}`}
+                            className={`sleep-slot ${
+                              reservation ? "booked" : ""
+                            } ${isSelected ? "selected" : ""}`}
                             onClick={() => setSelectedSlotId(slot.id)}
                           >
                             <div>
@@ -443,7 +549,8 @@ export default function App() {
 
                             {reservation ? (
                               <em>
-                                Réservé par {reservation.firstName} {reservation.lastName}
+                                Réservé par {reservation.firstName}{" "}
+                                {reservation.lastName}
                               </em>
                             ) : (
                               <em>Libre</em>
@@ -462,7 +569,9 @@ export default function App() {
                         Prénom
                         <input
                           value={guestFirstName}
-                          onChange={(event) => setGuestFirstName(event.target.value)}
+                          onChange={(event) =>
+                            setGuestFirstName(event.target.value)
+                          }
                           placeholder="Ex : Julie"
                         />
                       </label>
@@ -471,7 +580,9 @@ export default function App() {
                         Nom
                         <input
                           value={guestLastName}
-                          onChange={(event) => setGuestLastName(event.target.value)}
+                          onChange={(event) =>
+                            setGuestLastName(event.target.value)
+                          }
                           placeholder="Ex : Martin"
                         />
                       </label>
@@ -481,12 +592,17 @@ export default function App() {
                       Téléphone facultatif
                       <input
                         value={guestPhone}
-                        onChange={(event) => setGuestPhone(event.target.value)}
+                        onChange={(event) =>
+                          setGuestPhone(event.target.value)
+                        }
                         placeholder="En cas de besoin"
                       />
                     </label>
 
-                    <button className="primary-button" disabled={!selectedSlotId || loading}>
+                    <button
+                      className="primary-button"
+                      disabled={!selectedSlotId || loading}
+                    >
                       Réserver ce couchage
                       <ChevronRight size={18} />
                     </button>
@@ -515,10 +631,26 @@ export default function App() {
             </div>
 
             <div className="info-cards">
-              <InfoCard icon={<MapPin />} title="Adresse" text="Domaine de la Haute-Porte, La Haute-Porte, 72300 Souvigné-sur-Sarthe." />
-              <InfoCard icon={<CalendarDays />} title="Arrivée" text="Arrivée prévue à partir de 16h. L’horaire exact sera confirmé avant le week-end." />
-              <InfoCard icon={<ShieldCheck />} title="Départ" text="Départ à organiser tranquillement le dimanche, selon les conditions de location." />
-              <InfoCard icon={<Castle />} title="Esprit du week-end" text="Chic mais détendu. Venez beaux, venez simples, venez surtout avec votre bonne humeur." />
+              <InfoCard
+                icon={<MapPin />}
+                title="Adresse"
+                text="Domaine de la Haute-Porte, La Haute-Porte, 72300 Souvigné-sur-Sarthe."
+              />
+              <InfoCard
+                icon={<CalendarDays />}
+                title="Arrivée"
+                text="Arrivée prévue à partir de 16h. L’horaire exact sera confirmé avant le week-end."
+              />
+              <InfoCard
+                icon={<ShieldCheck />}
+                title="Départ"
+                text="Départ à organiser tranquillement le dimanche, selon les conditions de location."
+              />
+              <InfoCard
+                icon={<Castle />}
+                title="Esprit du week-end"
+                text="Chic mais détendu. Venez beaux, venez simples, venez surtout avec votre bonne humeur."
+              />
             </div>
           </div>
         </section>
@@ -622,7 +754,11 @@ function Header({ onReserveClick }) {
 function Hero({ onReserveClick }) {
   return (
     <section className="hero">
-      <img src="/images/chateau.jpg" alt="Domaine de la Haute-Porte" className="hero-image" />
+      <img
+        src="/images/chateau.jpg"
+        alt="Domaine de la Haute-Porte"
+        className="hero-image"
+      />
 
       <div className="hero-overlay" />
 
