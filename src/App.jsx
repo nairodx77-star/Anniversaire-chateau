@@ -327,7 +327,7 @@ export default function App() {
               <h2>Une belle demeure pour un week-end qui sort de l’ordinaire.</h2>
             </div>
 
-           <div className="text-block">
+          <div className="text-block">
   <p>
     Pour nos 40 ans, on avait deux options : accepter dignement le temps
     qui passe… ou privatiser un château du XIXe siècle pour faire comme
@@ -346,6 +346,15 @@ export default function App() {
     Évidemment, le champagne sera de la partie. Parce qu’à 40 ans, on ne
     vieillit pas : on millésime.
   </p>
+
+  <a
+    className="domain-pdf-link"
+    href="https://domainedelahauteporte.com/pages-plaquettes/Plaquette%20locaton%20saisonni%C3%A8re%20HP..pdf"
+    target="_blank"
+    rel="noreferrer"
+  >
+    Découvrir la plaquette du Domaine de la Haute-Porte
+  </a>
 </div>
           </div>
         </section>
