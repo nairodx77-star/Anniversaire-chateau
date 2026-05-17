@@ -591,15 +591,15 @@ export default function App() {
                     </div>
 
                     <label>
-                      Téléphone facultatif
-                      <input
-                        value={guestPhone}
-                        onChange={(event) =>
-                          setGuestPhone(event.target.value)
-                        }
-                        placeholder="En cas de besoin"
-                      />
-                    </label>
+  Commentaire
+  <input
+    value={guestPhone}
+    onChange={(event) =>
+      setGuestPhone(event.target.value)
+    }
+    placeholder="Ex : je viens avec mon conjoint, arrivée tardive, préférence de chambre..."
+  />
+</label>
 
                     <button
   type="submit"
