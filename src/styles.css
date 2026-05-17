@@ -944,11 +944,11 @@ input:focus {
 .hero-portrait-left {
   left: clamp(24px, 4vw, 72px);
   bottom: clamp(40px, 9vh, 110px);
-  width: clamp(150px, 15vw, 245px);
+  width: clamp(180px, 17vw, 280px);
   aspect-ratio: 3 / 4;
   border-radius: 28px;
   overflow: hidden;
-  opacity: 0.82;
+  opacity: 1;
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
   border: 1px solid rgba(255, 253, 248, 0.22);
   transform: rotate(-2deg);
@@ -973,8 +973,9 @@ input:focus {
 .hero-gallery-right {
   right: clamp(24px, 4vw, 82px);
   top: clamp(120px, 18vh, 190px);
-  width: clamp(220px, 23vw, 360px);
-  height: clamp(360px, 52vh, 570px);
+  width: clamp(260px, 25vw, 400px);
+  height: clamp(380px, 52vh, 580px);
+  opacity: 1;
 }
 
 .hero-gallery-card {
@@ -1024,12 +1025,12 @@ input:focus {
 
 @media (max-width: 1180px) {
   .hero-portrait-left {
-    opacity: 0.42;
+    opacity: 0.85;
     width: 170px;
   }
 
   .hero-gallery-right {
-    opacity: 0.5;
+    opacity: 0.85;
     width: 260px;
   }
 }
