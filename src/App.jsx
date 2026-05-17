@@ -739,7 +739,6 @@ export default function App() {
     </div>
   );
 }
-
 function Header({ onReserveClick }) {
   return (
     <header className="header">
@@ -784,59 +783,6 @@ function Hero({ onReserveClick }) {
           <img src="/images/Salon2.jpg" alt="Salon du château" />
         </div>
       </div>
-
-      <div className="hero-content">
-        <div className="hero-kicker">
-          <Sparkles size={16} />
-          Invitation privée
-        </div>
-
-        <h1>Dorian & Erwan vous invitent pour leurs 40 ans.</h1>
-
-        <p>
-          Pour fêter ça dignement, rendez-vous dans une belle demeure de
-          caractère : piscine, grands espaces, chambres de charme et un week-end
-          pensé pour profiter ensemble.
-        </p>
-
-        <div className="hero-actions">
-          <button className="primary-button light" onClick={onReserveClick}>
-            Réserver mon couchage
-            <ChevronRight size={18} />
-          </button>
-
-          <a href="#domaine" className="ghost-link">
-            Découvrir le domaine
-          </a>
-        </div>
-
-        <div className="hero-facts">
-          <span>
-            <MapPin size={16} />
-            Souvigné-sur-Sarthe
-          </span>
-          <span>
-            <BedDouble size={16} />
-            30 couchages
-          </span>
-          <span>
-            <Palmtree size={16} />
-            Piscine & parc
-          </span>
-        </div>
-      </div>
-    </section>
-  );
-}
-  return (
-    <section className="hero">
-      <img
-        src="/images/chateau.jpg"
-        alt="Domaine de la Haute-Porte"
-        className="hero-image"
-      />
-
-      <div className="hero-overlay" />
 
       <div className="hero-content">
         <div className="hero-kicker">
