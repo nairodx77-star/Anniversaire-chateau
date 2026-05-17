@@ -1,6 +1,10 @@
 {
+  "name": "anniversaire-chateau",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mini-site d'invitation et de réservation des couchages pour l'anniversaire de Dorian et Erwan.",
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
+    "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -9,7 +13,6 @@
     "vite": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "framer-motion": "latest",
     "lucide-react": "latest"
   },
   "devDependencies": {}
