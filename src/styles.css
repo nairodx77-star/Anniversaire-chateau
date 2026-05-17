@@ -929,3 +929,114 @@ input:focus {
     flex-direction: column;
   }
 }
+.hero-luxury .hero-content {
+  position: relative;
+  z-index: 6;
+}
+
+.hero-portrait,
+.hero-gallery {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero-portrait-left {
+  left: clamp(24px, 4vw, 72px);
+  bottom: clamp(40px, 9vh, 110px);
+  width: clamp(150px, 15vw, 245px);
+  aspect-ratio: 3 / 4;
+  border-radius: 28px;
+  overflow: hidden;
+  opacity: 0.82;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
+  border: 1px solid rgba(255, 253, 248, 0.22);
+  transform: rotate(-2deg);
+}
+
+.hero-portrait-left::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.28)),
+    linear-gradient(90deg, rgba(246, 241, 232, 0.08), transparent);
+}
+
+.hero-portrait img,
+.hero-gallery-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-gallery-right {
+  right: clamp(24px, 4vw, 82px);
+  top: clamp(120px, 18vh, 190px);
+  width: clamp(220px, 23vw, 360px);
+  height: clamp(360px, 52vh, 570px);
+}
+
+.hero-gallery-card {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 253, 248, 0.22);
+  box-shadow: 0 34px 100px rgba(0, 0, 0, 0.32);
+  background: rgba(255, 253, 248, 0.08);
+}
+
+.hero-gallery-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.08), transparent 42%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.28), transparent 48%);
+}
+
+.hero-gallery-card-main {
+  top: 0;
+  right: 0;
+  width: 88%;
+  height: 62%;
+  transform: rotate(2deg);
+}
+
+.hero-gallery-card-secondary {
+  left: 0;
+  bottom: 0;
+  width: 72%;
+  height: 45%;
+  transform: rotate(-3deg);
+}
+
+.hero-luxury::before {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 13% 76%, rgba(255, 253, 248, 0.12), transparent 16rem),
+    radial-gradient(circle at 86% 36%, rgba(255, 253, 248, 0.14), transparent 18rem);
+}
+
+@media (max-width: 1180px) {
+  .hero-portrait-left {
+    opacity: 0.42;
+    width: 170px;
+  }
+
+  .hero-gallery-right {
+    opacity: 0.5;
+    width: 260px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-portrait,
+  .hero-gallery {
+    display: none;
+  }
+}
