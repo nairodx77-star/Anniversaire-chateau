@@ -600,18 +600,25 @@ export default function App() {
                     </label>
 
                     <button
-                      className="primary-button"
-                      disabled={!selectedSlotId || loading}
-                    >
-                      Réserver ce couchage
-                      <ChevronRight size={18} />
-                    </button>
+  type="submit"
+  className="primary-button"
+  disabled={!selectedSlotId || loading}
+>
+  Réserver ce couchage
+  <ChevronRight size={18} />
+</button>
 
-                    {!selectedSlotId && (
-                      <p className="form-help">
-                        Sélectionne d’abord un couchage libre dans la chambre.
-                      </p>
-                    )}
+{systemMessage && (
+  <p className="form-help" style={{ fontWeight: 700 }}>
+    {systemMessage}
+  </p>
+)}
+
+{!selectedSlotId && (
+  <p className="form-help">
+    Sélectionne d’abord un couchage libre dans la chambre.
+  </p>
+)}
                   </form>
                 </div>
               </section>
