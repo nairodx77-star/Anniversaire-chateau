@@ -482,6 +482,19 @@ export default function App() {
         <li>Votre bonne humeur accompagnée de votre plus beau sourire</li>
       </ul>
     </div>
+    <div className="weekend-spirit-box">
+  <div>
+    <p className="eyebrow">Esprit du week-end</p>
+    <h3>Chic, détendu, vivant.</h3>
+  </div>
+
+  <p>
+Chic mais détendu. Venez beaux, venez simples, venez surtout avec votre bonne humeur.
+L’idée est de profiter ensemble d’un week-end hors du temps : du château,
+de la piscine, des activités, des bons verres, des grandes tablées et des
+gens qu’on aime.
+  </p>
+</div>
   </div>
 </section>
         <section className="section reservation-section" id="reservation">
@@ -700,83 +713,7 @@ export default function App() {
             </div>
           </div>
         </section>
-
-        <section className="section practical-section" id="infos">
-          <div className="container practical-grid">
-            <div>
-              <p className="eyebrow">Infos pratiques</p>
-              <h2>Adresse, arrivée et départ.</h2>
-              <p>
-                Les détails définitifs pourront être ajustés, mais voici la base
-                pour vous organiser.
-              </p>
-            </div>
-
-            <div className="info-cards">
-              <InfoCard
-                icon={<MapPin />}
-                title="Adresse"
-                text="Domaine de la Haute-Porte, La Haute-Porte, 72300 Souvigné-sur-Sarthe."
-              />
-              <InfoCard
-  icon={<CalendarDays />}
-  title="Arrivée"
-  text="Arrivée prévue le 17 juillet à partir de 16h. Le départ se fera le 19 juillet en début d’après-midi."
-/>
-<InfoCard
-  icon={<GlassWater />}
-  title="Frais"
-  text="Pour le logement, une participation aux frais de 175 € par personne sera demandée, à régler si possible avant le 17 juin via Wero ou Revolut. Pour le champagne, le rosé, les bières et les repas, on s’en occupe. Pour les autres alcools, il est fortement apprécié de ramener de quoi s’amuser :)"
-/>
-              <InfoCard
-                icon={<Castle />}
-                title="Esprit du week-end"
-                text="Chic mais détendu. Venez beaux, venez simples, venez surtout avec votre bonne humeur."
-              />
-            </div>
-          </div>
-        </section>
-<div className="payment-box">
-  <div>
-    <p className="eyebrow">Participation</p>
-    <h3>Remboursement des frais</h3>
-    <p>
-      Pour le logement, une participation de <strong>175 € par personne</strong>
-      est demandée, à régler si possible avant le <strong>17 juin</strong>.
-    </p>
-    <p>
-      Pour le champagne, le rosé, les bières et les repas, on s’en occupe.
-      Pour les autres alcools, il est fortement apprécié de ramener de quoi
-      s’amuser :)
-    </p>
-  </div>
-
-  <div className="payment-actions">
-    <a
-      href="https://share.weropay.eu/p/1/c/4JXSIAu37i"
-      target="_blank"
-      rel="noreferrer"
-    >
-      Payer avec Wero
-    </a>
-
-    <a
-      href="https://revolut.me/nairod77"
-      target="_blank"
-      rel="noreferrer"
-    >
-      Payer avec Revolut
-    </a>
-  </div>
-</div>
-
-<div className="coordination-note">
-  <p>
-    Pour le détail de l’organisation, contactez-moi directement. Sinon, trois
-    semaines avant le jour J, un groupe WhatsApp sera créé pour coordonner les
-    forces vives.
-  </p>
-</div>
+       
         <section className="section admin-section">
           <div className="container admin-box">
             <div>
@@ -886,7 +823,6 @@ function Header({ onReserveClick }) {
   <a href="#activites">Activités</a>
   <a href="#programme">Programme</a>
   <a href="#reservation">Couchages</a>
-  <a href="#infos">Infos pratiques</a>
   <a href="#carte">Carte</a>
 </nav>
 
