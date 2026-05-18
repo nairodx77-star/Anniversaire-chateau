@@ -661,10 +661,10 @@ export default function App() {
                 text="Domaine de la Haute-Porte, La Haute-Porte, 72300 Souvigné-sur-Sarthe."
               />
               <InfoCard
-                icon={<CalendarDays />}
-                title="Arrivée"
-                text="Arrivée prévue à partir de 16h. L’horaire exact sera confirmé avant le week-end. Le départ se fera en début d'après-midi"
-              />
+  icon={<CalendarDays />}
+  title="Arrivée"
+  text="Arrivée prévue le 17 juillet à partir de 16h. Le départ se fera le 19 juillet en début d’après-midi."
+/>
               <InfoCard
   icon={<GlassWater />}
   title="Frais"
@@ -813,11 +813,11 @@ function Hero({ onReserveClick }) {
 
         <h1>Dorian & Erwan vous invitent pour leurs 40 ans.</h1>
 
-        <p>
-          Pour fêter ça dignement, rendez-vous dans une belle demeure de
-          caractère : piscine, grands espaces, chambres de charme et un week-end
-          pensé pour profiter ensemble.
-        </p>
+<p>
+  Pour fêter ça dignement, rendez-vous du 17 au 19 juillet au
+  château de la Haute-Porte, entre piscine, grandes espaces et nature, pour un
+  week-end hors du temps à partager ensemble.
+</p>
 
         <div className="hero-actions">
           <button className="primary-button light" onClick={onReserveClick}>
@@ -831,19 +831,23 @@ function Hero({ onReserveClick }) {
         </div>
 
         <div className="hero-facts">
-          <span>
-            <MapPin size={16} />
-            Souvigné-sur-Sarthe
-          </span>
-          <span>
-            <BedDouble size={16} />
-            30 couchages
-          </span>
-          <span>
-            <Palmtree size={16} />
-            Piscine & parc
-          </span>
-        </div>
+  <span>
+    <MapPin size={16} />
+    Souvigné-sur-Sarthe
+  </span>
+  <span>
+    <BedDouble size={16} />
+    30 couchages
+  </span>
+  <span>
+    <CalendarDays size={16} />
+    17, 18, 19 juillet
+  </span>
+  <span>
+    <Palmtree size={16} />
+    Piscine & parc
+  </span>
+</div>
       </div>
     </section>
   );
