@@ -841,6 +841,27 @@ export default function App() {
             )}
           </div>
         </section>
+       <section className="section map-section" id="carte">
+  <div className="container">
+    <div className="section-heading centered">
+      <p className="eyebrow">S’y rendre</p>
+      <h2>Le Domaine de la Haute-Porte</h2>
+      <p>
+        Domaine de la Haute-Porte, La Haute-Porte, 72300 Souvigné-sur-Sarthe.
+      </p>
+    </div>
+
+    <div className="map-card">
+      <iframe
+        title="Carte du Domaine de la Haute-Porte"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1335970.944356705!2d-1.7618590527686875!3d49.156567209091406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48084401bb4a6dc3%3A0x9c2e30e3f4b131!2sLe%20Domaine%20de%20la%20Haute-Porte!5e0!3m2!1sfr!2sfr!4v1779110082791!5m2!1sfr!2sfr"
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </div>
+</section> 
       </main>
 
       <footer className="footer">
@@ -866,6 +887,7 @@ function Header({ onReserveClick }) {
   <a href="#programme">Programme</a>
   <a href="#reservation">Couchages</a>
   <a href="#infos">Infos pratiques</a>
+  <a href="#carte">Carte</a>
 </nav>
 
       <button onClick={onReserveClick}>Réserver</button>
