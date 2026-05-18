@@ -451,8 +451,9 @@ export default function App() {
         <h3>Journée libre & activités</h3>
         <p>
           La matinée sera libre pour profiter tranquillement du château, de la
-          piscine et du domaine. Dans l’après-midi, un certain nombre
-          d’activités seront proposées. Plus d’informations à venir.
+          piscine et du domaine. 
+          Dans l’après-midi, un certain nombre d’activités seront proposées. Plus d’informations à venir... 
+          Soir : dîner, champagne, fête et célébration des 40 ans
         </p>
       </article>
 
