@@ -425,7 +425,65 @@ export default function App() {
             </div>
           </div>
         </section>
+<section className="section weekend-section" id="programme">
+  <div className="container">
+    <div className="section-heading centered">
+      <p className="eyebrow">Programme</p>
+      <h2>Un week-end au château, entre détente et festivités.</h2>
+      <p>
+        Le programme détaillé arrivera progressivement, mais voici déjà les
+        grandes lignes pour vous organiser.
+      </p>
+    </div>
 
+    <div className="weekend-grid">
+      <article className="weekend-card">
+        <span>Vendredi 17 juillet</span>
+        <h3>Arrivée & installation</h3>
+        <p>
+          Arrivée à partir de 16h, installation dans les chambres, découverte
+          du domaine, piscine si la météo le permet, puis apéritif d’accueil.
+        </p>
+      </article>
+
+      <article className="weekend-card featured">
+        <span>Samedi 18 juillet</span>
+        <h3>Journée libre & activités</h3>
+        <p>
+          La matinée sera libre pour profiter tranquillement du château, de la
+          piscine et du domaine. Dans l’après-midi, un certain nombre
+          d’activités seront proposées. Plus d’informations à venir.
+        </p>
+      </article>
+
+      <article className="weekend-card">
+        <span>Dimanche 19 juillet</span>
+        <h3>Derniers moments au domaine</h3>
+        <p>
+          Réveil en douceur, petit-déjeuner ou brunch tranquille, puis départ
+          en début d’après-midi.
+        </p>
+      </article>
+    </div>
+
+    <div className="prepare-box">
+      <div>
+        <p className="eyebrow">À prévoir</p>
+        <h3>Dans son sac</h3>
+      </div>
+
+      <ul>
+        <li>Maillot de bain</li>
+        <li>Tenue confortable pour la journée</li>
+        <li>Tenue un peu plus chic pour le samedi soir</li>
+        <li>Crème solaire indice 50</li>
+        <li>Anti-moustique, car on ne sait jamais : c’est la nature</li>
+        <li>De quoi contribuer au bar si vous avez des bouteilles fétiches</li>
+        <li>Votre bonne humeur accompagnée de votre plus beau sourire</li>
+      </ul>
+    </div>
+  </div>
+</section>
         <section className="section reservation-section" id="reservation">
           <div className="container">
             <div className="section-heading">
@@ -665,10 +723,10 @@ export default function App() {
   title="Arrivée"
   text="Arrivée prévue le 17 juillet à partir de 16h. Le départ se fera le 19 juillet en début d’après-midi."
 />
-              <InfoCard
+<InfoCard
   icon={<GlassWater />}
   title="Frais"
-  text="Pour le logement, une participation aux frais de 175 € par personne sera demandée. Pour le champagne, le rosé, les bières et les repas, on s’en occupe. Pour les autres alcools, il est fortement apprécié de ramener de quoi s’amuser :)"
+  text="Pour le logement, une participation aux frais de 175 € par personne sera demandée, à régler si possible avant le 17 juin via Wero ou Revolut. Pour le champagne, le rosé, les bières et les repas, on s’en occupe. Pour les autres alcools, il est fortement apprécié de ramener de quoi s’amuser :)"
 />
               <InfoCard
                 icon={<Castle />}
@@ -678,7 +736,47 @@ export default function App() {
             </div>
           </div>
         </section>
+<div className="payment-box">
+  <div>
+    <p className="eyebrow">Participation</p>
+    <h3>Remboursement des frais</h3>
+    <p>
+      Pour le logement, une participation de <strong>175 € par personne</strong>
+      est demandée, à régler si possible avant le <strong>17 juin</strong>.
+    </p>
+    <p>
+      Pour le champagne, le rosé, les bières et les repas, on s’en occupe.
+      Pour les autres alcools, il est fortement apprécié de ramener de quoi
+      s’amuser :)
+    </p>
+  </div>
 
+  <div className="payment-actions">
+    <a
+      href="https://share.weropay.eu/p/1/c/4JXSIAu37i"
+      target="_blank"
+      rel="noreferrer"
+    >
+      Payer avec Wero
+    </a>
+
+    <a
+      href="https://revolut.me/nairod77"
+      target="_blank"
+      rel="noreferrer"
+    >
+      Payer avec Revolut
+    </a>
+  </div>
+</div>
+
+<div className="coordination-note">
+  <p>
+    Pour le détail de l’organisation, contactez-moi directement. Sinon, trois
+    semaines avant le jour J, un groupe WhatsApp sera créé pour coordonner les
+    forces vives.
+  </p>
+</div>
         <section className="section admin-section">
           <div className="container admin-box">
             <div>
@@ -762,12 +860,13 @@ function Header({ onReserveClick }) {
         <span>D & E</span>
       </a>
 
-      <nav>
-        <a href="#domaine">Le domaine</a>
-        <a href="#activites">Activités</a>
-        <a href="#reservation">Couchages</a>
-        <a href="#infos">Infos pratiques</a>
-      </nav>
+<nav>
+  <a href="#domaine">Le domaine</a>
+  <a href="#activites">Activités</a>
+  <a href="#programme">Programme</a>
+  <a href="#reservation">Couchages</a>
+  <a href="#infos">Infos pratiques</a>
+</nav>
 
       <button onClick={onReserveClick}>Réserver</button>
     </header>
