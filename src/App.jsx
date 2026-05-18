@@ -468,6 +468,39 @@ export default function App() {
 
     <div className="prepare-box">
       <div>
+<div className="fees-box">
+  <div>
+    <p className="eyebrow">Frais</p>
+    <h3>Participation au logement</h3>
+  </div>
+
+  <div>
+    <p>
+      Une participation de <strong>175 € par personne</strong> sera demandée
+      pour les frais de logement, à régler si possible avant le{" "}
+      <strong>17 juin</strong>. Pour le champagne, le rosé, les bières et
+      les repas, on s’en occupe.
+    </p>
+
+    <div className="fees-actions">
+      <a
+        href="https://share.weropay.eu/p/1/c/4JXSIAu37i"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Payer avec Wero
+      </a>
+
+      <a
+        href="https://revolut.me/nairod77"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Payer avec Revolut
+      </a>
+    </div>
+  </div>
+</div>
         <p className="eyebrow">À prévoir</p>
         <h3>Dans son sac</h3>
       </div>
