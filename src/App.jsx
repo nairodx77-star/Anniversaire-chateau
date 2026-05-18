@@ -402,11 +402,11 @@ export default function App() {
                 title="Balades"
                 text="Parc, chemins, nature et coins tranquilles pour respirer."
               />
-              <Activity
-                icon={<Fish />}
-                title="Pêche"
-                text="Une activité calme pour ceux qui aiment disparaître deux heures."
-              />
+             <Activity
+  icon={<Sparkles />}
+  title="Ball-trap"
+  text="Pour ceux qui aiment le son rassurant d’un calibre 12/76."
+/>
               <Activity
                 icon={<Dumbbell />}
                 title="Jeux & extérieur"
