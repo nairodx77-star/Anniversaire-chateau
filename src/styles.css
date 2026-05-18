@@ -1579,3 +1579,39 @@ input:focus {
     font-size: 1.85rem;
   }
 }
+.fees-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.fees-actions a {
+  min-height: 50px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.fees-actions a:hover {
+  transform: translateY(-1px);
+  background: var(--gold-dark);
+}
+
+@media (max-width: 900px) {
+  .fees-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .fees-actions a {
+    width: 100%;
+  }
+}
