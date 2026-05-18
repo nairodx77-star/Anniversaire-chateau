@@ -668,7 +668,7 @@ export default function App() {
               <InfoCard
   icon={<GlassWater />}
   title="Frais"
-  text="Pour le logement, une participation aux frais de 165 € par personne sera demandée. Pour le champagne, le rosé, les bières et les repas, on s’en occupe. Pour les autres alcools, il est fortement apprécié de ramener de quoi s’amuser :)"
+  text="Pour le logement, une participation aux frais de 175 € par personne sera demandée. Pour le champagne, le rosé, les bières et les repas, on s’en occupe. Pour les autres alcools, il est fortement apprécié de ramener de quoi s’amuser :)"
 />
               <InfoCard
                 icon={<Castle />}
