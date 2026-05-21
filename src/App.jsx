@@ -480,6 +480,7 @@ export default function App() {
 
       <ul>
         <li>Maillot de bain</li>
+        <li>Une serviette de bain et une serviette de piscine</li>
         <li>Tenue confortable pour la journée</li>
         <li>Tenue un peu plus chic pour le samedi soir</li>
         <li>Crème solaire indice 50</li>
