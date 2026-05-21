@@ -358,73 +358,7 @@ export default function App() {
 </a>
 </div>
           </div>
-        </section>
-
-        <section className="section image-story">
-          <div className="container image-story-grid">
-            <div className="story-card large">
-              <img src="/images/domaine.jpg" alt="Domaine de la Haute-Porte" />
-              <div>
-                <span>Nature & élégance</span>
-                <strong>Parc, bois, rivière et grands espaces</strong>
-              </div>
-            </div>
-
-            <div className="story-card">
-              <img src="/images/piscine.jpg" alt="Piscine du domaine" />
-              <div>
-                <span>Piscine</span>
-                <strong>Un week-end pour profiter, pas pour courir</strong>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section activities-section" id="activites">
-          <div className="container">
-            <div className="section-heading centered">
-              <p className="eyebrow">Sur place</p>
-              <h2>Activités, piscine et art de vivre.</h2>
-              <p>
-                Rien d’obligatoire. L’idée, c’est de profiter du lieu, du moment
-                et des gens.
-              </p>
-            </div>
-
-            <div className="activity-grid">
-              <Activity
-                icon={<Waves />}
-                title="Piscine"
-                text="Pour profiter du domaine entre deux verres et trois discussions."
-              />
-              <Activity
-                icon={<TreePine />}
-                title="Balades"
-                text="Parc, chemins, nature et coins tranquilles pour respirer."
-              />
-             <Activity
-  icon={<Sparkles />}
-  title="Ball-trap"
-  text="Pour ceux qui aiment le son rassurant d’un calibre 12/76."
-/>
-              <Activity
-                icon={<Dumbbell />}
-                title="Jeux & extérieur"
-                text="Volley, croquet, trampoline, grands espaces et esprit maison de vacances."
-              />
-              <Activity
-                icon={<GlassWater />}
-                title="Apéro"
-                text="Moment central du programme. La rigueur impose de le mentionner."
-              />
-              <Activity
-                icon={<Bath />}
-                title="Détente"
-                text="Un lieu fait pour ralentir, discuter, rire et dormir un peu."
-              />
-            </div>
-          </div>
-        </section>
+    
 <section className="section weekend-section" id="programme">
   <div className="container">
     <div className="section-heading centered">
