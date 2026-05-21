@@ -320,111 +320,116 @@ export default function App() {
       <main>
         <Hero onReserveClick={scrollToReservation} />
 
-        <section className="section intro-section" id="domaine">
-          <div className="container split">
-            <div>
-              <p className="eyebrow">Le domaine</p>
-              <h2>Une belle demeure pour un week-end qui sort de l’ordinaire.</h2>
-            </div>
+ <section className="section intro-section" id="domaine">
+  <div className="container split">
+    <div>
+      <p className="eyebrow">Le domaine</p>
+      <h2>Une belle demeure pour un week-end qui sort de l’ordinaire.</h2>
+    </div>
 
-          <div className="text-block">
-  <p>
-    Pour nos 40 ans, on avait deux options : accepter dignement le temps
-    qui passe… ou privatiser un château du XIXe siècle pour faire comme
-    si tout allait très bien. On a choisi la deuxième option.
-  </p>
+    <div className="text-block">
+      <p>
+        Pour nos 40 ans, on avait deux options : accepter dignement le temps
+        qui passe… ou privatiser un château du XIXe siècle pour faire comme
+        si tout allait très bien. On a choisi la deuxième option.
+      </p>
 
-  <p>
-    On vous invite donc à passer un week-end en dehors du temps, au cœur
-    de la nature, dans une grande demeure pleine de charme, avec des
-    chambres pour dormir — un peu —, des espaces pour se retrouver, des
-    activités pour se divertir, et surtout une belle piscine qui devrait
-    devenir le théâtre officiel des meilleurs rosés du week-end.
-  </p>
+      <p>
+        On vous invite donc à passer un week-end en dehors du temps, au cœur
+        de la nature, dans une grande demeure pleine de charme, avec des
+        chambres pour dormir — un peu —, des espaces pour se retrouver, des
+        activités pour se divertir, et surtout une belle piscine qui devrait
+        devenir le théâtre officiel des meilleurs rosés du week-end.
+      </p>
 
-  <p>
-    Évidemment, le champagne sera de la partie. Parce qu’à 40 ans, on ne
-    vieillit pas : on millésime.
-  </p>
+      <p>
+        Évidemment, le champagne sera de la partie. Parce qu’à 40 ans, on ne
+        vieillit pas : on millésime.
+      </p>
 
-  <a
-  className="domain-pdf-button"
-  href="https://domainedelahauteporte.com/pages-plaquettes/Plaquette%20locaton%20saisonni%C3%A8re%20HP..pdf"
-  target="_blank"
-  rel="noreferrer"
->
-  <span>Découvrir le château</span>
-  <small>Voir la plaquette officielle du Domaine</small>
-</a>
-</div>
-                </section>
+      <a
+        className="domain-pdf-button"
+        href="https://domainedelahauteporte.com/pages-plaquettes/Plaquette%20locaton%20saisonni%C3%A8re%20HP..pdf"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span>Découvrir le château</span>
+        <small>Voir la plaquette officielle du Domaine</small>
+      </a>
+    </div>
+  </div>
+</section>
 
-        <section className="section image-story">
-          <div className="container image-story-grid">
-            <div className="story-card large">
-              <img src="/images/domaine.jpg" alt="Domaine de la Haute-Porte" />
-              <div>
-                <span>Nature & élégance</span>
-                <strong>Parc, bois, rivière et grands espaces</strong>
-              </div>
-            </div>
+<section className="section image-story">
+  <div className="container image-story-grid">
+    <div className="story-card large">
+      <img src="/images/domaine.jpg" alt="Domaine de la Haute-Porte" />
+      <div>
+        <span>Nature & élégance</span>
+        <strong>Parc, bois, rivière et grands espaces</strong>
+      </div>
+    </div>
 
-            <div className="story-card">
-              <img src="/images/piscine.jpg" alt="Piscine du domaine" />
-              <div>
-                <span>Piscine</span>
-                <strong>Un week-end pour profiter, pas pour courir</strong>
-              </div>
-            </div>
-          </div>
-        </section>
+    <div className="story-card">
+      <img src="/images/piscine.jpg" alt="Piscine du domaine" />
+      <div>
+        <span>Piscine</span>
+        <strong>Un week-end pour profiter, pas pour courir</strong>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <section className="section activities-section" id="activites">
-          <div className="container">
-            <div className="section-heading centered">
-              <p className="eyebrow">Sur place</p>
-              <h2>Activités, piscine et art de vivre.</h2>
-              <p>
-                Rien d’obligatoire. L’idée, c’est de profiter du lieu, du moment
-                et des gens.
-              </p>
-            </div>
+<section className="section activities-section" id="activites">
+  <div className="container">
+    <div className="section-heading centered">
+      <p className="eyebrow">Sur place</p>
+      <h2>Activités, piscine et art de vivre.</h2>
+      <p>
+        Rien d’obligatoire. L’idée, c’est de profiter du lieu, du moment
+        et des gens.
+      </p>
+    </div>
 
-            <div className="activity-grid">
-              <Activity
-                icon={<Waves />}
-                title="Piscine"
-                text="Pour profiter du domaine entre deux verres et trois discussions."
-              />
-              <Activity
-                icon={<TreePine />}
-                title="Balades"
-                text="Parc, chemins, nature et coins tranquilles pour respirer."
-              />
-             <Activity
-  icon={<Sparkles />}
-  title="Ball-trap"
-  text="Pour ceux qui aiment le son rassurant d’un calibre 12/76."
-/>
-              <Activity
-                icon={<Dumbbell />}
-                title="Jeux & extérieur"
-                text="Volley, croquet, trampoline, grands espaces et esprit maison de vacances."
-              />
-              <Activity
-                icon={<GlassWater />}
-                title="Apéro"
-                text="Moment central du programme. La rigueur impose de le mentionner."
-              />
-              <Activity
-                icon={<Bath />}
-                title="Détente"
-                text="Un lieu fait pour ralentir, discuter, rire et dormir un peu."
-              />
-            </div>
-          </div>
-        </section>
-          </div>
+    <div className="activity-grid">
+      <Activity
+        icon={<Waves />}
+        title="Piscine"
+        text="Pour profiter du domaine entre deux verres et trois discussions."
+      />
+
+      <Activity
+        icon={<TreePine />}
+        title="Balades"
+        text="Parc, chemins, nature et coins tranquilles pour respirer."
+      />
+
+      <Activity
+        icon={<Sparkles />}
+        title="Ball-trap"
+        text="Pour ceux qui aiment le son rassurant d’un calibre 12/76."
+      />
+
+      <Activity
+        icon={<Dumbbell />}
+        title="Jeux & extérieur"
+        text="Volley, croquet, trampoline, grands espaces et esprit maison de vacances."
+      />
+
+      <Activity
+        icon={<GlassWater />}
+        title="Apéro"
+        text="Moment central du programme. La rigueur impose de le mentionner."
+      />
+
+      <Activity
+        icon={<Bath />}
+        title="Détente"
+        text="Un lieu fait pour ralentir, discuter, rire et dormir un peu."
+      />
+    </div>
+  </div>
+</section>
     <section className="section weekend-section" id="programme">
   <div className="container">
     <div className="section-heading centered">
