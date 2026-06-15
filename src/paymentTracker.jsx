@@ -238,10 +238,43 @@ function PaymentTracker() {
   );
 }
 
+function tuneFeesBox() {
+  const feesBox = document.querySelector(".fees-box");
+  if (!feesBox) return false;
+
+  const feeParagraph = feesBox.querySelector("p:not(.eyebrow)");
+  if (feeParagraph) {
+    feeParagraph.innerHTML = feeParagraph.innerHTML
+      .replace("on s’en occupe", "c’est pour nous ;)")
+      .replace("on s'en occupe", "c’est pour nous ;)");
+  }
+
+  const links = Array.from(feesBox.querySelectorAll(".fees-actions a"));
+  links.forEach((link) => {
+    const href = link.getAttribute("href") || "";
+    const label = link.textContent || "";
+
+    if (href.includes("weropay") || label.toLowerCase().includes("wero")) {
+      link.remove();
+      return;
+    }
+
+    if (href.includes("revolut") || label.toLowerCase().includes("revolut")) {
+      link.textContent = "Payer en ligne";
+    }
+  });
+
+  return true;
+}
+
 export function initPaymentTracker() {
   function mount() {
     const feesBox = document.querySelector(".fees-box");
-    if (!feesBox || document.querySelector(".payment-tracker-shell")) return false;
+    if (!feesBox) return false;
+
+    tuneFeesBox();
+
+    if (document.querySelector(".payment-tracker-shell")) return true;
 
     const shell = document.createElement("div");
     shell.className = "payment-tracker-shell";
