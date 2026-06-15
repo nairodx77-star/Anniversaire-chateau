@@ -1,0 +1,301 @@
+.carpool-section {
+  padding: 96px 0;
+  background:
+    radial-gradient(circle at top right, rgba(176, 138, 87, 0.14), transparent 28rem),
+    var(--cream);
+}
+
+.carpool-shell {
+  width: min(1160px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.carpool-hero {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: 44px;
+  align-items: end;
+  margin-bottom: 30px;
+}
+
+.carpool-hero h2 {
+  margin: 8px 0 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  line-height: 0.96;
+  letter-spacing: -0.055em;
+}
+
+.carpool-hero p:not(.eyebrow) {
+  color: var(--ink-soft);
+  font-size: 1.06rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.carpool-grid {
+  display: grid;
+  grid-template-columns: 0.78fr 1.22fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.carpool-panel,
+.carpool-card,
+.carpool-admin-box {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 253, 248, 0.76);
+  box-shadow: 0 18px 60px rgba(23, 20, 18, 0.07);
+}
+
+.carpool-panel {
+  padding: 28px;
+  position: sticky;
+  top: 104px;
+}
+
+.carpool-panel h3,
+.carpool-admin-box h3 {
+  margin: 0 0 16px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.8rem;
+}
+
+.carpool-panel p {
+  color: var(--ink-soft);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.carpool-form,
+.passenger-form,
+.carpool-admin-form {
+  display: grid;
+  gap: 12px;
+}
+
+.carpool-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.65fr;
+  gap: 12px;
+}
+
+.carpool-form label,
+.passenger-form label {
+  margin: 0;
+}
+
+.carpool-form button,
+.passenger-form button,
+.carpool-admin-form button,
+.carpool-admin-actions button {
+  min-height: 48px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--ink);
+  color: var(--white);
+  padding: 0 18px;
+  font-weight: 800;
+}
+
+.carpool-admin-actions button.secondary,
+.carpool-admin-actions button.danger {
+  background: rgba(23, 20, 18, 0.08);
+  color: var(--ink);
+}
+
+.carpool-admin-actions button.danger {
+  background: rgba(159, 58, 47, 0.12);
+  color: var(--danger);
+}
+
+.carpool-message {
+  margin: 12px 0 0;
+  color: var(--ink-soft);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.carpool-list {
+  display: grid;
+  gap: 16px;
+}
+
+.carpool-card {
+  overflow: hidden;
+}
+
+.carpool-card-top {
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: start;
+  border-bottom: 1px solid var(--line);
+}
+
+.carpool-card-top h3 {
+  margin: 6px 0 8px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.carpool-route {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+.carpool-route span {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.seats-pill {
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: var(--green-soft);
+  color: var(--green);
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.seats-pill.full {
+  background: rgba(159, 58, 47, 0.12);
+  color: var(--danger);
+}
+
+.carpool-card-body {
+  padding: 22px;
+  display: grid;
+  gap: 18px;
+}
+
+.passengers-list {
+  display: grid;
+  gap: 8px;
+}
+
+.passenger-chip {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  font-weight: 800;
+}
+
+.passenger-empty {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.passenger-form {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.passenger-form-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.carpool-empty {
+  border: 1px dashed rgba(176, 138, 87, 0.45);
+  border-radius: var(--radius);
+  padding: 28px;
+  background: rgba(255, 253, 248, 0.58);
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+.carpool-admin-box {
+  margin-top: 24px;
+  padding: 28px;
+}
+
+.carpool-admin-list {
+  margin-top: 20px;
+  display: grid;
+  gap: 12px;
+}
+
+.carpool-admin-item {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+  padding: 16px;
+}
+
+.carpool-admin-item strong,
+.carpool-admin-item span {
+  display: block;
+}
+
+.carpool-admin-item span {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.carpool-admin-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.carpool-edit-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.7fr 0.55fr;
+  gap: 10px;
+}
+
+@media (max-width: 960px) {
+  .carpool-hero,
+  .carpool-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .carpool-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .carpool-section {
+    padding: 72px 0;
+  }
+
+  .carpool-shell {
+    width: min(100% - 28px, 1160px);
+  }
+
+  .carpool-card-top,
+  .carpool-form-grid,
+  .passenger-form-row,
+  .carpool-edit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .seats-pill {
+    width: fit-content;
+  }
+}
