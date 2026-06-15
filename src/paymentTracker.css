@@ -1,0 +1,180 @@
+.payment-tracker-shell {
+  width: min(980px, calc(100% - 40px));
+  margin: 28px auto 0;
+}
+
+.payment-tracker {
+  padding: 28px;
+  border: 1px solid rgba(176, 138, 87, 0.24);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(255, 253, 248, 0.92), rgba(246, 241, 232, 0.78));
+  box-shadow: 0 18px 60px rgba(23, 20, 18, 0.08);
+}
+
+.payment-header {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.payment-header h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.payment-header p:not(.eyebrow) {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+.payment-list {
+  display: grid;
+  gap: 10px;
+}
+
+.payment-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+  padding: 14px 16px;
+}
+
+.payment-name {
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.payment-status {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.86rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.payment-row.is-paid .payment-status {
+  background: rgba(52, 63, 53, 0.12);
+  color: var(--green);
+}
+
+.payment-row.is-pending .payment-status {
+  background: rgba(176, 138, 87, 0.16);
+  color: var(--gold-dark);
+}
+
+.payment-empty,
+.payment-message {
+  margin: 12px 0 0;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.payment-message {
+  font-weight: 700;
+}
+
+.payment-admin-form,
+.payment-form {
+  margin-top: 22px;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+}
+
+.payment-admin-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.payment-admin-form input {
+  flex: 1 1 260px;
+  margin: 0;
+}
+
+.payment-admin-form button,
+.payment-form button,
+.payment-actions button {
+  border: 0;
+  border-radius: 16px;
+  background: var(--ink);
+  color: var(--white);
+  padding: 0 18px;
+  min-height: 48px;
+  font-weight: 800;
+}
+
+.payment-form h4 {
+  margin: 0 0 16px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.55rem;
+}
+
+.payment-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.paid-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--ink-soft);
+  font-weight: 800;
+}
+
+.paid-checkbox input {
+  width: auto;
+}
+
+.payment-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.payment-actions button {
+  min-height: 40px;
+  padding: 0 12px;
+  font-size: 0.84rem;
+}
+
+.payment-actions button.danger {
+  background: rgba(159, 58, 47, 0.12);
+  color: var(--danger);
+}
+
+@media (max-width: 720px) {
+  .payment-tracker-shell {
+    width: min(100% - 28px, 980px);
+  }
+
+  .payment-tracker {
+    padding: 22px 16px;
+  }
+
+  .payment-row,
+  .payment-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-admin-form {
+    display: grid;
+  }
+}
