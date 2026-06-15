@@ -1,0 +1,113 @@
+/* Overrides chargés directement depuis main.jsx pour garantir l'application du correctif. */
+.reservation-section {
+  padding-top: 72px !important;
+  padding-bottom: 82px !important;
+}
+
+.reservation-section > .container {
+  width: min(1040px, calc(100% - 40px)) !important;
+  max-width: 1040px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.reservation-section .section-heading {
+  max-width: 720px !important;
+  margin-bottom: 28px !important;
+}
+
+.reservation-section .stats-grid {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-bottom: 24px !important;
+}
+
+.reservation-section .booking-layout {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: grid !important;
+  grid-template-columns: minmax(260px, 310px) minmax(0, 1fr) !important;
+  gap: 22px !important;
+  align-items: start !important;
+  overflow: visible !important;
+}
+
+.reservation-section .room-list,
+.reservation-section .room-detail,
+.reservation-section .room-content,
+.reservation-section .sleep-list,
+.reservation-section .reservation-form {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.reservation-section .room-list {
+  padding: 18px !important;
+}
+
+.reservation-section .room-detail {
+  overflow: hidden !important;
+}
+
+.reservation-section .room-content {
+  padding: 26px !important;
+}
+
+.reservation-section .room-visual {
+  height: 320px !important;
+}
+
+.reservation-section .room-title-row h3 {
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem) !important;
+}
+
+.reservation-section .sleep-slot,
+.reservation-section .room-button {
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+@media (max-width: 960px) {
+  .reservation-section .booking-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .reservation-section .room-list {
+    position: static !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .reservation-section {
+    padding-top: 62px !important;
+    padding-bottom: 70px !important;
+  }
+
+  .reservation-section > .container {
+    width: min(100% - 28px, 1040px) !important;
+  }
+
+  .reservation-section .stats-grid,
+  .reservation-section .form-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .reservation-section .room-content {
+    padding: 22px 16px !important;
+  }
+
+  .reservation-section .room-visual {
+    height: 250px !important;
+  }
+
+  .reservation-section .room-title-row,
+  .reservation-section .sleep-slot {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .reservation-section .sleep-slot em {
+    text-align: left !important;
+  }
+}
