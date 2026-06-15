@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./styles.css";
 import { initPaymentTracker } from "./paymentTracker.jsx";
+import { initCarpoolModule } from "./carpool.jsx";
 
 function updateHousingFeesBlock() {
   const feesBox = document.querySelector(".fees-box");
@@ -74,4 +75,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 );
 
 initPaymentTracker();
+initCarpoolModule();
 keepPageCorrectionsUpdated();
