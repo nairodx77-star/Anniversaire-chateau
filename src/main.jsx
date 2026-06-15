@@ -5,6 +5,7 @@ import "./styles.css";
 import { initPaymentTracker } from "./paymentTracker.jsx";
 import { initCarpoolModule } from "./carpool.jsx";
 
+// Page-level modules mounted after the main React app is rendered.
 function updateHousingFeesBlock() {
   const feesBox = document.querySelector(".fees-box");
   if (!feesBox) return false;
