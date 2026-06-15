@@ -51,6 +51,27 @@ function updateFridayProgramBlock() {
   return true;
 }
 
+function moveReservationAdminToEnd() {
+  const adminSection = document.querySelector(".admin-section");
+  const carpoolMount = document.querySelector(".carpool-mount");
+  const main = document.querySelector("main");
+
+  if (!adminSection || !main) return false;
+
+  if (carpoolMount) {
+    if (carpoolMount.nextElementSibling !== adminSection) {
+      carpoolMount.insertAdjacentElement("afterend", adminSection);
+    }
+    return true;
+  }
+
+  if (main.lastElementChild !== adminSection) {
+    main.appendChild(adminSection);
+  }
+
+  return true;
+}
+
 function removeActivitiesSection() {
   const activitiesSection = document.querySelector(".activities-section");
   const activitiesNavLink = document.querySelector('.header nav a[href="#activites"]');
@@ -73,6 +94,7 @@ function keepPageCorrectionsUpdated() {
 
     updateHousingFeesBlock();
     updateFridayProgramBlock();
+    moveReservationAdminToEnd();
     removeActivitiesSection();
 
     if (attempts >= 120) {
@@ -83,6 +105,7 @@ function keepPageCorrectionsUpdated() {
   window.addEventListener("load", () => {
     updateHousingFeesBlock();
     updateFridayProgramBlock();
+    moveReservationAdminToEnd();
     removeActivitiesSection();
   }, { once: true });
 }
