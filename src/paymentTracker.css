@@ -1,3 +1,9 @@
+/* Masque la section Activités devenue trop lourde pour la lecture du site. */
+.activities-section,
+.header nav a[href="#activites"] {
+  display: none !important;
+}
+
 /* Correctif global : la zone Frais est rendue dans App.jsx hors d'une section.
    On la recentre et on lui redonne le même niveau de finition que le reste du site. */
 .fees-box {
