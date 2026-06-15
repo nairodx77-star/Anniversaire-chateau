@@ -33,18 +33,38 @@ function updateHousingFeesBlock() {
   return true;
 }
 
-function keepHousingFeesBlockUpdated() {
+function removeActivitiesSection() {
+  const activitiesSection = document.querySelector(".activities-section");
+  const activitiesNavLink = document.querySelector('.header nav a[href="#activites"]');
+
+  if (activitiesSection) {
+    activitiesSection.remove();
+  }
+
+  if (activitiesNavLink) {
+    activitiesNavLink.remove();
+  }
+
+  return Boolean(activitiesSection || activitiesNavLink);
+}
+
+function keepPageCorrectionsUpdated() {
   let attempts = 0;
   const timer = window.setInterval(() => {
     attempts += 1;
-    const updated = updateHousingFeesBlock();
 
-    if (updated || attempts >= 80) {
+    updateHousingFeesBlock();
+    removeActivitiesSection();
+
+    if (attempts >= 120) {
       window.clearInterval(timer);
     }
   }, 250);
 
-  window.addEventListener("load", updateHousingFeesBlock, { once: true });
+  window.addEventListener("load", () => {
+    updateHousingFeesBlock();
+    removeActivitiesSection();
+  }, { once: true });
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -54,4 +74,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 );
 
 initPaymentTracker();
-keepHousingFeesBlockUpdated();
+keepPageCorrectionsUpdated();
