@@ -241,18 +241,32 @@ function PaymentTracker() {
 export function initPaymentTracker() {
   function mount() {
     const feesBox = document.querySelector(".fees-box");
-    if (!feesBox || document.querySelector(".payment-tracker-shell")) return;
+    if (!feesBox || document.querySelector(".payment-tracker-shell")) return false;
 
     const shell = document.createElement("div");
     shell.className = "payment-tracker-shell";
+    shell.setAttribute("data-payment-tracker", "true");
     feesBox.insertAdjacentElement("afterend", shell);
     createRoot(shell).render(<PaymentTracker />);
+    return true;
   }
 
-  mount();
+  function tryMountRepeatedly() {
+    let attempts = 0;
+    const timer = window.setInterval(() => {
+      attempts += 1;
+      const mounted = mount();
+      if (mounted || attempts >= 60) {
+        window.clearInterval(timer);
+      }
+    }, 500);
+  }
 
-  const observer = new MutationObserver(() => mount());
-  observer.observe(document.body, { childList: true, subtree: true });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", tryMountRepeatedly, { once: true });
+  } else {
+    window.requestAnimationFrame(tryMountRepeatedly);
+  }
 
-  window.setTimeout(() => observer.disconnect(), 10000);
+  window.addEventListener("load", mount, { once: true });
 }
