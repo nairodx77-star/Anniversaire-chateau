@@ -10,9 +10,8 @@ function updateHousingFeesBlock() {
 
   const paragraph = feesBox.querySelector("p:not(.eyebrow)");
   if (paragraph) {
-    paragraph.innerHTML = paragraph.innerHTML
-      .replace("on s’en occupe", "c’est pour nous ;)")
-      .replace("on s'en occupe", "c’est pour nous ;)");
+    paragraph.innerHTML =
+      'Une participation de <strong>175 € par personne</strong> sera demandée pour couvrir les frais de logement. Pour le reste, on a prévu de vous recevoir comme il se doit : repas, champagne, bière et rosé seront de la partie.';
   }
 
   const links = Array.from(feesBox.querySelectorAll(".fees-actions a"));
