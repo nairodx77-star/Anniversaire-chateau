@@ -36,6 +36,21 @@ function updateHousingFeesBlock() {
   return true;
 }
 
+function updateFridayProgramBlock() {
+  const cards = Array.from(document.querySelectorAll(".weekend-card"));
+  const fridayCard = cards.find((card) => card.textContent.includes("Vendredi 17 juillet"));
+
+  if (!fridayCard) return false;
+
+  const paragraph = fridayCard.querySelector("p");
+  if (!paragraph) return false;
+
+  paragraph.textContent =
+    "Arrivée à partir de 16h, installation dans les chambres, découverte du domaine, piscine et rosé pour se remettre du trajet, puis apéritif d’accueil à partir de 19h00, repas à partir de 20h30. Notre maître crêpier sera à votre disposition à son stand pour crêpes salées et sucrées à volonté. Ensuite, soirée dans une ambiance musicale.";
+
+  return true;
+}
+
 function removeActivitiesSection() {
   const activitiesSection = document.querySelector(".activities-section");
   const activitiesNavLink = document.querySelector('.header nav a[href="#activites"]');
@@ -57,6 +72,7 @@ function keepPageCorrectionsUpdated() {
     attempts += 1;
 
     updateHousingFeesBlock();
+    updateFridayProgramBlock();
     removeActivitiesSection();
 
     if (attempts >= 120) {
@@ -66,6 +82,7 @@ function keepPageCorrectionsUpdated() {
 
   window.addEventListener("load", () => {
     updateHousingFeesBlock();
+    updateFridayProgramBlock();
     removeActivitiesSection();
   }, { once: true });
 }
