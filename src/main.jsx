@@ -87,6 +87,35 @@ function removeActivitiesSection() {
   return Boolean(activitiesSection || activitiesNavLink);
 }
 
+function addFooterHeart() {
+  const footerContainer = document.querySelector(".footer .container");
+  if (!footerContainer) return false;
+
+  if (footerContainer.querySelector(".footer-heart")) return true;
+
+  const heart = document.createElement("span");
+  heart.className = "footer-heart";
+  heart.textContent = "♥";
+  heart.setAttribute("aria-hidden", "true");
+
+  Object.assign(heart.style, {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "34px",
+    height: "34px",
+    border: "1px solid rgba(176, 138, 87, 0.35)",
+    borderRadius: "999px",
+    color: "#b08a57",
+    background: "rgba(255, 253, 248, 0.58)",
+    fontSize: "1.05rem",
+    lineHeight: "1",
+  });
+
+  footerContainer.appendChild(heart);
+  return true;
+}
+
 function keepPageCorrectionsUpdated() {
   let attempts = 0;
   const timer = window.setInterval(() => {
@@ -96,6 +125,7 @@ function keepPageCorrectionsUpdated() {
     updateFridayProgramBlock();
     moveReservationAdminToEnd();
     removeActivitiesSection();
+    addFooterHeart();
 
     if (attempts >= 120) {
       window.clearInterval(timer);
@@ -107,6 +137,7 @@ function keepPageCorrectionsUpdated() {
     updateFridayProgramBlock();
     moveReservationAdminToEnd();
     removeActivitiesSection();
+    addFooterHeart();
   }, { once: true });
 }
 
