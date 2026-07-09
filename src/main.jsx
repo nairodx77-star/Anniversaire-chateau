@@ -116,31 +116,6 @@ function addFooterHeart() {
   return true;
 }
 
-function addJoelGreeting() {
-  const footerContainer = document.querySelector(".footer .container");
-  if (!footerContainer) return false;
-
-  if (footerContainer.querySelector(".joel-greeting")) return true;
-
-  const greeting = document.createElement("span");
-  greeting.className = "joel-greeting";
-  greeting.textContent = "bonjour Joël !";
-
-  Object.assign(greeting.style, {
-    color: "rgba(64, 56, 50, 0.78)",
-    fontWeight: "700",
-  });
-
-  const heart = footerContainer.querySelector(".footer-heart");
-  if (heart) {
-    footerContainer.insertBefore(greeting, heart);
-  } else {
-    footerContainer.appendChild(greeting);
-  }
-
-  return true;
-}
-
 function keepPageCorrectionsUpdated() {
   let attempts = 0;
   const timer = window.setInterval(() => {
@@ -151,7 +126,6 @@ function keepPageCorrectionsUpdated() {
     moveReservationAdminToEnd();
     removeActivitiesSection();
     addFooterHeart();
-    addJoelGreeting();
 
     if (attempts >= 120) {
       window.clearInterval(timer);
@@ -164,7 +138,6 @@ function keepPageCorrectionsUpdated() {
     moveReservationAdminToEnd();
     removeActivitiesSection();
     addFooterHeart();
-    addJoelGreeting();
   }, { once: true });
 }
 
